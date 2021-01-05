@@ -1,4 +1,5 @@
 ﻿using System;
+using Hospital.Actions.Actions.Users;
 using Hospital.Menu.Interfaces;
 
 namespace Hospital.Menu.MenuItems
@@ -9,8 +10,7 @@ namespace Hospital.Menu.MenuItems
 
         public void Handle()
         {
-            Console.Clear();
-            Console.WriteLine("Create user - menu handle");
+            new UsersCreate().Handle();
         }
     }
 }
