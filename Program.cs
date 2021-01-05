@@ -1,4 +1,5 @@
 ﻿using System;
+using Hospital.Menu.Menus;
 
 namespace Hospital
 {
@@ -6,7 +7,10 @@ namespace Hospital
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            while (true)
+            {
+                new MainMenu().Render();   
+            }
         }
     }
 }
