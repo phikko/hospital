@@ -3,6 +3,7 @@ using System.Data.SqlTypes;
 using Hospital.Menu.Classes;
 using Hospital.Menu.Interfaces;
 using Hospital.Menu.MenuItems;
+using Hospital.Menu.MenuItems.Users;
 
 namespace Hospital.Menu.Menus
 {
@@ -11,7 +12,8 @@ namespace Hospital.Menu.Menus
         public override List<IMenuItem> items => new List<IMenuItem>()
         {
             new GoBackItem(),
-            new UserCreateItem()
+            new UsersIndexItem(),
+            new UsersCreateItem()
         };
     }
 }

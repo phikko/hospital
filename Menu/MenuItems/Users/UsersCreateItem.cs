@@ -2,9 +2,9 @@
 using Hospital.Actions.Actions.Users;
 using Hospital.Menu.Interfaces;
 
-namespace Hospital.Menu.MenuItems
+namespace Hospital.Menu.MenuItems.Users
 {
-    public class UserCreateItem : IMenuItem
+    public class UsersCreateItem : IMenuItem
     {
         public string label => "Create new user";
 
