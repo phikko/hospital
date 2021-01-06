@@ -1,4 +1,5 @@
 ﻿using System;
+using Hospital.Actions.Actions.Auth;
 using Hospital.Menu.Menus;
 
 namespace Hospital
@@ -7,6 +8,7 @@ namespace Hospital
     {
         static void Main(string[] args)
         {
+            new AuthLogin().Handle();
             while (true)
             {
                 new MainMenu().Render();   

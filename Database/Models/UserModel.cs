@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Hospital.Database.Models
 {
@@ -16,9 +17,9 @@ namespace Hospital.Database.Models
     
     public class UserModel : BaseModel
     {
-        public User[] GetAllUsers()
+        public List<User> GetAllUsers()
         {
-            return _connection.Table<User>().ToArray();
+            return _connection.Table<User>().ToList();
         }
 
         public User CreateUser(User user)
@@ -26,6 +27,11 @@ namespace Hospital.Database.Models
             _connection.Insert(user);
             Console.Write("tyes");
             return user;
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            return _connection.Table<User>().Where(user => user.Username == username).First();
         }
     }
 }
