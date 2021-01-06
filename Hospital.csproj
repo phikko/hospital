@@ -9,10 +9,13 @@
       <None Update="Database\database.sqlite">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="database.sqlite">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.Data.SQLite.Core" Version="1.0.113.7" />
+      <PackageReference Include="SQLite" Version="3.13.0" />
     </ItemGroup>
 
 </Project>

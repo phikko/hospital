@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Reflection.Metadata;
 using Hospital.Actions.Classes;
+using Hospital.Database.Models;
 
 namespace Hospital.Actions.Actions.Users
 {
@@ -9,7 +9,12 @@ namespace Hospital.Actions.Actions.Users
         public override void Handle()
         {
             Console.Clear();
-            Console.WriteLine("Users Index Action");
+            Console.WriteLine("LISTING ALL USERS");
+            User[] users = new UserModel().GetAllUsers();
+            foreach (var user in users)
+            {
+                Console.WriteLine("#{0} | {1} {2} | {3} | {4}", user.Id, user.Firstname, user.Lastname, user.Pesel, user.Username);
+            }
         }
     }
 }
