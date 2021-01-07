@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConsoleTables;
 using Hospital.Actions.Classes;
 using Hospital.Database.Models;
 
@@ -12,27 +13,43 @@ namespace Hospital.Actions.Actions.Users
         {
             Console.Clear();
             Console.WriteLine("LISTING ALL USERS");
-            List<User> users = new UserModel().GetAllUsers();
-            Dictionary<int, Admin> admins = new AdminModel().GetAllAdmins().ToDictionary(admin => admin.Id);
-            Dictionary<int, Nurse> nurses = new NurseModel().GetAllNurses().ToDictionary(nurse => nurse.Id);
-            Dictionary<int, Doctor> doctors = new DoctorModel().GetAllDoctors().ToDictionary(doctor => doctor.Id);
-            foreach (var user in users)
+            Dictionary<int, User> users = new UserModel().GetAllUsers().ToDictionary(user => user.Id);
+            List<Admin> admins = new AdminModel().GetAllAdmins().ToList();
+            List<Nurse> nurses = new NurseModel().GetAllNurses().ToList();
+            List<Doctor> doctors = new DoctorModel().GetAllDoctors().ToList();
+            
+            Console.WriteLine("ADMINS");
+            foreach (var admin in admins)
             {
-                switch (user.TypableType)
-                {
-                    case "admin":
-                        Console.WriteLine(admins[user.TypableId].UserId);
-                        break;
-                    case "nurse":
-                        Console.WriteLine(nurses[user.TypableId].UserId);
-                        break;
-                    case "doctor":
-                        Console.WriteLine(doctors[user.TypableId].UserId);
-                        break;
-                    default:
-                        Console.WriteLine("default");
-                        break;
-                }
+                var table = new ConsoleTable("#", "Last name", "First name", "PESEL", "Username");
+                var currentUser = users[admin.UserId];
+                table.AddRow(currentUser.Id, currentUser.Lastname, currentUser.Firstname, currentUser.Pesel, currentUser.Username);
+                table.Write(Format.Alternative);
+            }
+            
+            Console.WriteLine("NURSES");
+            foreach (var nurse in nurses)
+            {
+                var table = new ConsoleTable("#", "Last name", "First name", "PESEL", "Username");
+                var currentUser = users[nurse.UserId];
+                table.AddRow(currentUser.Id, currentUser.Lastname, currentUser.Firstname, currentUser.Pesel, currentUser.Username);
+                table.Write(Format.Alternative);
+            }
+            
+            Console.WriteLine("DOCTORS");
+            foreach (var doctor in doctors)
+            {
+                var table = new ConsoleTable("#", "Last name", "First name", "PESEL", "Username", "Speciality", "PWZ");
+                var currentUser = users[doctor.UserId];
+                table.AddRow(currentUser.Id, currentUser.Lastname, currentUser.Firstname, currentUser.Pesel, currentUser.Username, doctor.Speciality, doctor.Pwz);
+                table.Write(Format.Alternative);
+            }
+            
+            Console.WriteLine("If you want to edit a user type ID here (leave blank to exit): ");
+            int input = 0;
+            if (int.TryParse(Console.ReadLine(), out input))
+            {
+                Console.WriteLine("User Edit action");
             }
         }
     }
