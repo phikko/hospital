@@ -14,6 +14,10 @@ namespace Hospital.Database.Models
     
     public class AdminModel : BaseModel
     {
+        public List<Admin> GetAllAdmins()
+        {
+            return _connection.Table<Admin>().ToList();
+        }
         public Admin GetByUserId(int id)
         {
             return _connection.Table<Admin>().Where(user => user.Id == id).First();

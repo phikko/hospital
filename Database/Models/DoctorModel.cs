@@ -16,6 +16,11 @@ namespace Hospital.Database.Models
     
     public class DoctorModel : BaseModel
     {
+        public List<Doctor> GetAllDoctors()
+        {
+            return _connection.Table<Doctor>().ToList();
+        }
+        
         public Doctor GetByUserId(int id)
         {
             return _connection.Table<Doctor>().Where(user => user.Id == id).First();
