@@ -26,17 +26,24 @@ namespace Hospital.Menu.Classes
             }
             Console.Write("Choose option: ");
             int input = 0;
-            while (int.TryParse(Console.ReadLine(), out input))
+            while (!int.TryParse(Console.ReadLine(), out input))
             {
-                try
-                {
-                    items[isFirstItemBackItem ? input : input - 1].Handle();
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Wrong input!");
-                }
+                Console.WriteLine("Wrong option!");
+            }
+            try
+            {
+                items[isFirstItemBackItem ? input : input - 1].Handle();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.Clear();
+                Console.WriteLine("Wrong option!");
+            }
+
+            if (isFirstItemBackItem)
+            {
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();   
             }
         }
     }
