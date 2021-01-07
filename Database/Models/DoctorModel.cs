@@ -10,6 +10,8 @@ namespace Hospital.Database.Models
         public int Id { get; set; }
         [Column("user_id")]
         public int UserId { get; set; }
+        public string Speciality { get; set; }
+        public string Pwz { get; set; }
     }
     
     public class DoctorModel : BaseModel
