@@ -13,6 +13,10 @@ namespace Hospital.Database.Models
         public string Pesel { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        [Column("typable_id")]
+        public int TypableId { get; set; }
+        [Column("typable_type")]
+        public string TypableType { get; set; }
     }
     
     public class UserModel : BaseModel
@@ -25,6 +29,12 @@ namespace Hospital.Database.Models
         public User CreateUser(User user)
         {
             int id = _connection.Insert(user);
+            return _connection.Table<User>().Where(row => row.Id == id).First();;
+        }
+        
+        public User UpdateUser(User user)
+        {
+            int id = _connection.Update(user);
             return _connection.Table<User>().Where(row => row.Id == id).First();;
         }
 

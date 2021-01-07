@@ -25,10 +25,10 @@ namespace Hospital.Actions.Actions.Users
             Console.Write("Password: ");
             user.Password = Console.ReadLine();
 
-            Console.Write("USER TYPE");
-            Console.Write("1. Admin");
-            Console.Write("2. Nurse");
-            Console.Write("3. Doctor");
+            Console.WriteLine("USER TYPE");
+            Console.WriteLine("1. Admin");
+            Console.WriteLine("2. Nurse");
+            Console.WriteLine("3. Doctor");
             int input = 0;
             User userFromDb = null;
             while (!int.TryParse(Console.ReadLine(), out input))
@@ -38,14 +38,21 @@ namespace Hospital.Actions.Actions.Users
             switch (input)
             {
                 case 1:
+                    user.TypableType = "admin";
                     userFromDb = new UserModel().CreateUser(user);
-                    new AdminModel().CreateAdmin(new Admin {Id = userFromDb.Id});
+                    Admin adminFromDb = new AdminModel().CreateAdmin(new Admin {Id = userFromDb.Id});
+                    userFromDb.TypableId = adminFromDb.Id;
+                    new UserModel().UpdateUser(userFromDb);
                     break;
                 case 2:
+                    user.TypableType = "Nurse";
                     userFromDb = new UserModel().CreateUser(user);
-                    new NurseModel().CreateNurse(new Nurse {Id = userFromDb.Id});
+                    Nurse nurseFromDb = new NurseModel().CreateNurse(new Nurse {Id = userFromDb.Id});
+                    userFromDb.TypableId = nurseFromDb.Id;
+                    new UserModel().UpdateUser(userFromDb);
                     break;
                 case 3:
+                    user.TypableType = "doctor";
                     Doctor doctor = new Doctor();
                     Console.Write("Speciality: ");
                     doctor.Speciality = Console.ReadLine();
@@ -53,7 +60,9 @@ namespace Hospital.Actions.Actions.Users
                     doctor.Pwz = Console.ReadLine();
                     userFromDb = new UserModel().CreateUser(user);
                     doctor.UserId = userFromDb.Id;
-                    new DoctorModel().CreateDoctor(doctor);
+                    Doctor doctorFromDb = new DoctorModel().CreateDoctor(doctor);
+                    userFromDb.TypableId = doctorFromDb.Id;
+                    new UserModel().UpdateUser(userFromDb);
                     break;
                 default:
                     Console.WriteLine("Wrong Input!");
