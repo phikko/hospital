@@ -21,6 +21,7 @@ namespace Hospital.Actions.Actions.Auth
                     User user = new UserModel().GetUserByUsername(username);
                     if (user.Password == password)
                     {
+                        Hospital.Auth.Auth.User = user;
                         loggedIn = true;
                     }
                     else
