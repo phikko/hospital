@@ -45,12 +45,12 @@ namespace Hospital.Actions.Actions.Users
                 table.Write(Format.Alternative);
             }
             
-            Console.WriteLine("If you want to edit a user type ID here (leave blank to exit): ");
-            int input = 0;
-            if (int.TryParse(Console.ReadLine(), out input))
-            {
-                Console.WriteLine("User Edit action");
-            }
+            // Console.WriteLine("If you want to edit a user type ID here (leave blank to exit): ");
+            // int input = 0;
+            // if (int.TryParse(Console.ReadLine(), out input))
+            // {
+            //     Console.WriteLine("User Edit action");
+            // }
         }
     }
 }
