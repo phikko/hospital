@@ -24,9 +24,8 @@ namespace Hospital.Database.Models
 
         public User CreateUser(User user)
         {
-            _connection.Insert(user);
-            Console.Write("tyes");
-            return user;
+            int id = _connection.Insert(user);
+            return _connection.Table<User>().Where(row => row.Id == id).First();;
         }
 
         public User GetUserByUsername(string username)
