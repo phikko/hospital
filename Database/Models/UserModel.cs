@@ -42,5 +42,10 @@ namespace Hospital.Database.Models
         {
             return _connection.Table<User>().Where(user => user.Username == username).First();
         }
+        
+        public User GetUserById(int id)
+        {
+            return _connection.Table<User>().Where(user => user.Id == id).First();
+        }
     }
 }

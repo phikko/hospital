@@ -19,38 +19,38 @@ namespace Hospital.Actions.Actions.Users
             List<Doctor> doctors = new DoctorModel().GetAllDoctors().ToList();
             
             Console.WriteLine("ADMINS");
+            var tableAdmin = new ConsoleTable("#", "Last name", "First name", "PESEL", "Username");
             foreach (var admin in admins)
             {
-                var table = new ConsoleTable("#", "Last name", "First name", "PESEL", "Username");
                 var currentUser = users[admin.UserId];
-                table.AddRow(currentUser.Id, currentUser.Lastname, currentUser.Firstname, currentUser.Pesel, currentUser.Username);
-                table.Write(Format.Alternative);
+                tableAdmin.AddRow(currentUser.Id, currentUser.Lastname, currentUser.Firstname, currentUser.Pesel, currentUser.Username);
             }
+            tableAdmin.Write(Format.Alternative);
             
+            var tableNurse = new ConsoleTable("#", "Last name", "First name", "PESEL", "Username");
             Console.WriteLine("NURSES");
             foreach (var nurse in nurses)
             {
-                var table = new ConsoleTable("#", "Last name", "First name", "PESEL", "Username");
                 var currentUser = users[nurse.UserId];
-                table.AddRow(currentUser.Id, currentUser.Lastname, currentUser.Firstname, currentUser.Pesel, currentUser.Username);
-                table.Write(Format.Alternative);
+                tableNurse.AddRow(currentUser.Id, currentUser.Lastname, currentUser.Firstname, currentUser.Pesel, currentUser.Username);
             }
+            tableNurse.Write(Format.Alternative);
             
             Console.WriteLine("DOCTORS");
+            var tableDoctor = new ConsoleTable("#", "Last name", "First name", "PESEL", "Username", "Speciality", "PWZ");
             foreach (var doctor in doctors)
             {
-                var table = new ConsoleTable("#", "Last name", "First name", "PESEL", "Username", "Speciality", "PWZ");
                 var currentUser = users[doctor.UserId];
-                table.AddRow(currentUser.Id, currentUser.Lastname, currentUser.Firstname, currentUser.Pesel, currentUser.Username, doctor.Speciality, doctor.Pwz);
-                table.Write(Format.Alternative);
+                tableDoctor.AddRow(currentUser.Id, currentUser.Lastname, currentUser.Firstname, currentUser.Pesel, currentUser.Username, doctor.Speciality, doctor.Pwz);
             }
+            tableDoctor.Write(Format.Alternative);
             
-            // Console.WriteLine("If you want to edit a user type ID here (leave blank to exit): ");
-            // int input = 0;
-            // if (int.TryParse(Console.ReadLine(), out input))
-            // {
-            //     Console.WriteLine("User Edit action");
-            // }
+            Console.WriteLine("If you want to see user's calendar type ID here (leave blank to exit): ");
+            int input = 0;
+            if (int.TryParse(Console.ReadLine(), out input) && input > 0)
+            {
+                new UsersCalendar().Handle(input);
+            }
         }
     }
 }
